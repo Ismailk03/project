@@ -3,7 +3,7 @@ tasks:
     steps:
       - checkout
 
-      # commands to build Jekyll website
+      # commands to build Sparlex – Beauty & Spa Website Template
       - commands:
           - gem install bundler
           - rm Gemfile.lock
@@ -13,6 +13,6 @@ tasks:
       # commands to upload static pages folder to AWS S3
       - commands:
           - aws s3 rm s3://$project-0001 --recursive
-          - aws s3 sync _site/ s3://project-0001 --delete
+          - aws s3 sync _site/ s3://http://project-0001.s3-website-us-east-1.amazonaws.com--delete
 
     if: branch == 'master'
