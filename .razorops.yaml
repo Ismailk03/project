@@ -5,7 +5,6 @@ tasks:
     # commands to build Sparlex – Beauty & Spa Website Template
     - commands:
       - gem install bundler
-      - rm Gemfile.lock
       - bundle install
       
     # commands to upload static pages folder to AWS S3
