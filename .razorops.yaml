@@ -6,9 +6,6 @@ tasks:
       # commands to build Sparlex – Beauty & Spa Website Template
       - commands:
           
-          - bundle install
-          - bundle exec jekyll build
-
       # commands to upload static pages folder to AWS S3
       - commands:
           - aws s3 rm s3://$project-0001 --recursive
