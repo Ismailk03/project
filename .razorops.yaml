@@ -6,7 +6,7 @@ steps:
 
   - name: Deploy to S3
     run: |
-      aws s3 sync ./path/to/your/html/ s3://project-0001
+      aws s3 sync ./main/s3://project-0001
     env:
       AWS_ACCESS_KEY_ID: ${{ arn:aws:iam::283771154064:user/ismail@03 }}
       AWS_SECRET_ACCESS_KEY: ${{ oQ+sPuBvXAQ+MEpWk7vNc6F+Avy36eWRMi/XFAX8 }}
