@@ -1,17 +1,24 @@
 tasks:
   build:
     steps:
-    - checkout
-    # commands to build Sparlex – Beauty & Spa Website Template
-    - commands:
-    - gem install bundler
-      - rm Gemfile.lock
-      - bundle install
-      - JEKYLL_ENV=production bundle exec jekyll build
+      - name: Checkout
+        uses: actions/checkout@v2
 
-      
-    # commands to upload static pages folder to AWS S3
-    - commands:
-      - aws s3 rm s3://$project-0001 --recursive
-      - aws s3 cp _site s3://$project-0001 --recursive
-      if: branch == 'master'
+      # Commands to build Sparlex – Beauty & Spa Website Template
+      - name: Install Bundler
+        run: |
+          gem install bundler
+      - name: Remove Gemfile.lock
+        run: rm Gemfile.lock
+      - name: Bundle Install
+        run: bundle install
+      - name: Jekyll Build
+        run: JEKYLL_ENV=production bundle exec jekyll build
+
+      # Commands to upload static pages folder to AWS S3
+      - name: Clear S3 Bucket
+        run: aws s3 rm s3://$project-0001 --recursive
+        if: github.ref == 'refs/heads/master'
+      - name: Upload to S3
+        run: aws s3 cp _site s3://$project-0001 --recursive
+        if: github.ref == 'refs/heads/master'
