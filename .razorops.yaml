@@ -5,8 +5,7 @@ tasks:
 
       # commands to build Sparlex – Beauty & Spa Website Template
       - commands:
-          - gem install bundler
-          - rm Gemfile.lock
+          
           - bundle install
           - bundle exec jekyll build
 
