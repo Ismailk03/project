@@ -1,16 +1,18 @@
 tasks:
   build:
     steps:
-    - checkout
-    # commands to build jekyll website
-    - commands:
-       - gem install bundler
-      - rm Gemfile.lock
-      - bundle install
-      
+      - checkout
 
-    # commands to upload static pages folder to AWS S3
-    - commands:
-      - aws s3 rm s3://$project-0001 --recursive
-      - aws s3 cp _site s3://$http://project-0001.s3-website-us-east-1.amazonaws.com --recursive
-      if: branch == 'master'
+      # commands to build Jekyll website
+      - commands:
+          - gem install bundler
+          - rm Gemfile.lock
+          - bundle install
+          - bundle exec jekyll build
+
+      # commands to upload static pages folder to AWS S3
+      - commands:
+          - aws s3 rm s3://$project-0001 --recursive
+          - aws s3 sync _site/ s3://project-0001 --delete
+
+    if: branch == 'master'
