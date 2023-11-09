@@ -5,7 +5,7 @@ tasks:
        # ... other build steps   
       # commands to upload static pages folder to AWS S3
       - commands:
-          - aws configure set aws_access_key_id $AKIAUEEQUF2IEYKINOGQ
+          - aws configure set aws_access_key_id $arn:aws:iam::283771154064:user/ismail@03
           - aws configure set aws_secret_access_key $/u95coZ/UPit4JDADzf1Nbh1Jg0Yc3nkN8VNLd1W
           - aws s3 rm s3://$project-0001 --recursive
           - aws s3 sync _site/ s3://http://project-0001.s3-website-us-east-1.amazonaws.com--delete
