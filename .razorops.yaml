@@ -4,7 +4,6 @@ tasks:
     - checkout
     # commands to build jekyll website
     - commands:
-      - gem install bundler
       - bundle install
       - JEKYLL_ENV=production bundle exec jekyll build
 
