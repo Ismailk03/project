@@ -4,8 +4,10 @@ tasks:
     - checkout
     # commands to build jekyll website
     - commands:
+       - gem install bundler
+      - rm Gemfile.lock
       - bundle install
-      - JEKYLL_ENV=production bundle exec jekyll build
+      
 
     # commands to upload static pages folder to AWS S3
     - commands:
