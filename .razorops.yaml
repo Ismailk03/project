@@ -2,12 +2,20 @@ tasks:
   build:
     steps:
       - checkout
-       # ... other build steps   
-      # commands to upload static pages folder to AWS S3
-      - commands:
-          - aws configure set aws_access_key_id $AKIAUEEQUF2IEYKINOGQ
-          - aws configure set aws_secret_access_key $/u95coZ/UPit4JDADzf1Nbh1Jg0Yc3nkN8VNLd1W
-          - aws s3 rm s3://$project-0001 --recursive
-          - aws s3 sync _site/ s3://http://project-0001.s3-website-us-east-1.amazonaws.com--delete
 
-    if: branch == 'master'
+      # Install dependencies and build Jekyll site
+      - commands:
+          - gem install bundler
+          - bundle install
+          - bundle exec jekyll build
+
+  deploy:
+    steps:
+      - commands:
+          # Set AWS credentials from Razorops secrets
+          - aws configure set aws_access_key_id $AKIAUEEQUF2INUWXSMFS
+          - aws configure set aws_secret_access_key $gglFtc0Aq7XdMWNDaPHLhVOka4QWXkRrAvZmi8XZ
+          
+          # Sync _site directory to S3 bucket
+          - aws s3 sync _site/ s3://project-0001 --delete
+      if: branch == 'master'
