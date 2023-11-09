@@ -1,24 +1,12 @@
-tasks:
-  build:
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+image: node:14
 
-      # Commands to build Sparlex – Beauty & Spa Website Template
-      - name: Install Bundler
-        run: |
-          gem install bundler
-      - name: Remove Gemfile.lock
-        run: rm Gemfile.lock
-      - name: Bundle Install
-        run: bundle install
-      - name: Jekyll Build
-        run: JEKYLL_ENV=production bundle exec jekyll build
+steps:
+  - name: Checkout
+    uses: actions/checkout@v2
 
-      # Commands to upload static pages folder to AWS S3
-      - name: Clear S3 Bucket
-        run: aws s3 rm s3://$project-0001 --recursive
-        if: github.ref == 'refs/heads/master'
-      - name: Upload to S3
-        run: aws s3 cp _site s3://$project-0001 --recursive
-        if: github.ref == 'refs/heads/master'
+  - name: Deploy to S3
+    run: |
+      aws s3 sync ./path/to/your/html/ s3://your-s3-bucket-project-0001
+    env:
+      AWS_ACCESS_KEY_ID: ${{ arn:aws:iam::283771154064:user/ismail@03 }}
+      AWS_SECRET_ACCESS_KEY: ${{ oQ+sPuBvXAQ+MEpWk7vNc6F+Avy36eWRMi/XFAX8 }}
