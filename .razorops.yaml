@@ -1,19 +1,16 @@
-name: Upload Website
-
-on:
-  push:
-    branches:
-    - master
-
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
+tasks:
+  build:
     steps:
-    - uses: actions/checkout@master
-    - uses: jakejarvis/s3-sync-action@master
-      with:
-        args: --acl public-read --follow-symlinks --delete --exclude '.git*/*'
-      env:
-        AWS_S3_BUCKET: ${{ secrets.project-0001 }}
-        AWS_ACCESS_KEY_ID: ${{ secrets.AKIAUEEQUF2INUWXSMFS }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    - checkout
+    # commands to build Beauty & Spa website
+    - commands:
+      - gem install bundler
+      - rm Gemfile.lock
+      - bundle install
+      - JEKYLL_ENV=production bundle exec jekyll build
+
+    # commands to upload static pages folder to AWS S3
+    - commands:
+      - aws s3 rm s3://$project-0001--recursive
+      - aws s3 cp _site s3://$http://project-0001.s3-website-us-east-1.amazonaws.com --recursive
+      if: branch == 'main'
