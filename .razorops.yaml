@@ -13,4 +13,4 @@ tasks:
     - commands:
       - aws s3 rm s3://$project-0001--recursive
       - aws s3 cp _site s3://$http://project-0001.s3-website-us-east-1.amazonaws.com --recursive
-      if: branch == 'main'
+      if: branch == 'master'
