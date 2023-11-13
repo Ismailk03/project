@@ -5,7 +5,7 @@ tasks:
 
   deploy:
     steps:
-      - commands:
+        commands:
           # Install necessary tools (assuming they are not already installed)
           - sudo apt-get update
           - sudo apt-get install -y awscli git
