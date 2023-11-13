@@ -2,9 +2,6 @@ tasks:
   build:
     steps:
       - checkout
-
-  deploy:
-    steps:
         commands:
           # Install necessary tools (assuming they are not already installed)
           - sudo apt-get update
