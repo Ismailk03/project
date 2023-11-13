@@ -1,16 +1,21 @@
 tasks:
   build:
     steps:
-    - checkout
-    # commands to build Beauty & Spa website
-    - commands:
-      - gem install bundler
-      - rm Gemfile.lock
-      - bundle install
-      - JEKYLL_ENV=production bundle exec jekyll build
+      - checkout
 
-    # commands to upload static pages folder to AWS S3
-    - commands:
-      - aws s3 rm s3://$project-0001--recursive
-      - aws s3 cp _site s3://$http://project-0001.s3-website-us-east-1.amazonaws.com --recursive
-      if: branch == 'master'
+  deploy:
+    steps:
+      - commands:
+          # Install necessary tools (assuming they are not already installed)
+          - sudo apt-get update
+          - sudo apt-get install -y awscli git
+
+          # Clone the GitHub repository
+          - git clone https://gh repo clone Ismailk03/project
+          # Set AWS credentials
+          - aws configure set aws_access_key_id $AKIAUEEQUF2IJSDZM6XP
+          - aws configure set aws_secret_access_key $DYUSzIoyVBTYU57ePCQGjSjUI6icoltT0rsujTQR
+          
+          # Deploy to S3 bucket
+          - aws s3 sync your-html-repo/ s3://project-0001 
+      if: branch == 'master'  # Adjust the branch name as needed
